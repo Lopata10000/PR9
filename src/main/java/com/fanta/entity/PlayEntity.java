@@ -1,7 +1,5 @@
 package com.fanta.entity;
 
-import com.fanta.entity.Entity;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

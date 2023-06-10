@@ -1,7 +1,7 @@
 package com.fanta.dao;
 
-import com.fanta.entity.PerformanceEntity;
 import com.fanta.entity.Entity;
+import com.fanta.entity.PerformanceEntity;
 import com.fanta.exception.DaoException;
 import com.fanta.utils.DbUtil;
 

@@ -5,22 +5,20 @@ import com.fanta.services.ActorService;
 import com.fanta.validate.BirthDateValidation;
 import com.fanta.validate.DataValidation;
 import com.fanta.validate.EmailValidation;
-import com.fanta.validate.NameValidation;
 import com.fanta.validate.LastNameValidation;
+import com.fanta.validate.NameValidation;
 import com.fanta.validate.PasswordValidation;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.Scanner;
 
 public class UserService {
     private ActorService actorService = new ActorService();
-    private static final String ANSI_RESET = "\u001B[0m";
-    private static final String ANSI_RED = "\u001B[31m";
-    private static final String ANSI_GREEN = "\u001B[32m";
+
 
     DataValidation firstNameValidation = new NameValidation();
     DataValidation lastNameValidation = new LastNameValidation();
@@ -31,7 +29,7 @@ public class UserService {
     public void listActors() throws SQLException {
         List<ActorEntity> actors = actorService.getAllActors();
         if (actors.isEmpty()) {
-            System.out.println(ANSI_RED + "Акторів не знайдено! :(" + ANSI_RESET);
+            System.out.println("Акторів не знайдено! :(");
             Menu.menu();
             return;
         }
@@ -62,7 +60,7 @@ public class UserService {
         actor.setBirthDate(birthDate);
 
         actorService.addNewActor(actor);
-        System.out.println(ANSI_GREEN + "Актора додано! :)" + ANSI_RESET);
+        System.out.println("Актора додано успішно!");
         Menu.menu();
     }
 
@@ -75,7 +73,7 @@ public class UserService {
 
         ActorEntity actor = actorService.getActorById(actorId);
         if (actor == null) {
-            System.out.println(ANSI_RED + "Актора з ID " + actorId + " не знайдено! :(" + ANSI_RESET);
+            System.out.println("Актора з ID " + actorId + " не знайдено");
             Menu.menu();
             return;
         }
@@ -99,7 +97,7 @@ public class UserService {
         actor.setBirthDate(birthDate);
 
         actorService.updateActorById(actorId, actor);
-        System.out.println(ANSI_GREEN + "Актора оновлено! :)" + ANSI_RESET);
+        System.out.println("Актора оновлено! :)");
         Menu.menu();
     }
 
@@ -112,14 +110,14 @@ public class UserService {
 
         ActorEntity actor = actorService.getActorById(actorId);
         if (actor == null) {
-            System.out.println(ANSI_RED + "Актора з ID " + actorId + " не знайдено! :(" + ANSI_RESET);
+            System.out.println("Актора з ID " + actorId + " не знайдено!");
             Menu.menu();
             return;
         }
 
         System.out.println("Видалення актора з ID " + actorId);
         actorService.deleteActorById(actor.getId());
-        System.out.println(ANSI_GREEN + "Актора видалено! :)" + ANSI_RESET);
+        System.out.println("Актора видалено! :)");
         Menu.menu();
     }
 
@@ -131,7 +129,7 @@ public class UserService {
         scanner.nextLine();
         ActorEntity actor = actorService.getActorById(actorId);
         if (actor == null) {
-            System.out.println(ANSI_RED + "Актора з ID " + actorId + " не знайдено! :(" + ANSI_RESET);
+            System.out.println("Актора з ID " + actorId + " не знайдено!");
         } else {
             System.out.println("ID: " + actor.getId() + ", Ім'я: " + actor.getFirstName() + " " + actor.getLastName() + ", Емайл: " + actor.getEmail());
         }
@@ -142,7 +140,7 @@ public class UserService {
         String input = scanner.nextLine();
         fieldSetter.setField(actor, input);
         while (!validation.validate(actor)) {
-            System.out.println(ANSI_RED + errorMsg + ANSI_RESET);
+            System.out.println(errorMsg);
             input = scanner.nextLine();
             fieldSetter.setField(actor, input);
         }
@@ -162,11 +160,11 @@ public class UserService {
                 if (validation.validate(actor)) {
                     isValid = true;
                 } else {
-                    System.out.println(ANSI_RED + errorMsg + ANSI_RESET);
+                    System.out.println(errorMsg);
                     input = scanner.nextLine();
                 }
             } catch (DateTimeParseException e) {
-                System.out.println(ANSI_RED + errorMsg + ANSI_RESET);
+                System.out.println(errorMsg);
                 input = scanner.nextLine();
             }
         }

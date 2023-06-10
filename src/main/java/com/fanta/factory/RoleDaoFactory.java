@@ -1,6 +1,5 @@
 package com.fanta.factory;
 
-import com.fanta.dao.ActorDao;
 import com.fanta.dao.RoleDao;
 
 public class RoleDaoFactory {
